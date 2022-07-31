@@ -1,14 +1,11 @@
 <template>
-  <div class="app">
+  <div class="app d-flex justify-content-center align-items-center">
     <containerVue />
   </div>
 </template> 
 
 <style scoped>
 .app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(270.81deg, #00b9ae -2.2%, #21242d 103.17%);
   width: 100%;
   height: 100vh;

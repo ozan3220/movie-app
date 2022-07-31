@@ -1,65 +1,37 @@
 <template>
-  <div class="filterContainer">
-    <div class="selectContainer">
-      <h4>Genres</h4>
-      <select name="Genres" id="genre">
-        <option value="All genres" selected>All genres</option>
-        <option value="Komedi">Komedi</option>
-        <option value="Korku">Korku</option>
-        <option value="Aksiyon">Aksiyon</option>
-        <option value="Animasyon">Animasyon</option>
-      </select>
-    </div>
-
-    <div class="selectContainer">
-      <h4>IMDB</h4>
-      <select name="IMDB" id="imdb">
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
-        <option value="4">4+</option>
-        <option value="5">5+</option>
-        <option value="6">6+</option>
-        <option value="8">7+</option>
-        <option value="7">8+</option>
-        <option value="9">9+</option>
-      </select>
-    </div>
+  <div class="col-4 d-flex align-items-center flex-column">
+    <filter-item-vue header="Genre" :options="options.genres" />
+    <filter-item-vue header="IMDB" :options="options.imdb" />
     <button class="rollButton">Roll</button>
   </div>
 </template>
 
+  <script>
+import filterItemVue from "./filterItem.vue";
+export default {
+  data() {
+    return {
+      options: {
+        imdb: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        genres: ["All Genres", "Komedi", "Aksiyon", "Korku", "Animasyon"],
+      },
+    };
+  },
+  components: {
+    filterItemVue,
+  },
+};
+</script>
+  
 <style scoped>
-.filterContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .selectContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 300px;
 }
-#genre {
-  border: 0;
+.genre {
   width: 12rem;
   height: 2.6rem;
   border-radius: 2rem;
   background: #d9d9d9;
-  font-size: 18px;
-  text-align: center;
-}
-#imdb {
-  border: 0;
-  width: 12rem;
-  height: 2.6rem;
-  border-radius: 2rem;
-  background: #d9d9d9;
-  font-size: 18px;
-  text-align: center;
-  margin-left: 0.68rem;
 }
 .rollButton {
   width: 15rem;
@@ -107,19 +79,8 @@
   top: 2px;
 }
 .selectContainer h4 {
-  font-style: normal;
-  font-weight: 400;
-  text-align: center;
   color: #f9f9f9;
   letter-spacing: 1px;
   margin-right: 1rem;
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {};
-  },
-};
-</script>

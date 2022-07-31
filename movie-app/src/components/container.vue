@@ -1,17 +1,25 @@
 <template>
   <div class="container">
-    <FilterVue />
-    <InformationVue />
+    <div
+      class="
+        row
+        d-flex
+        flex-column flex-xxl-row
+        align-items-center
+        justify-content-center
+        ps-5
+        px-5
+      "
+    >
+      <FilterVue />
+      <InformationVue />
+    </div>
   </div>
 </template>
 
 <style scoped>
 .container {
   border-radius: 40px;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-  box-sizing: border-box;
   background: linear-gradient(
     118.93deg,
     rgba(255, 255, 255, 0.1) 24.69%,
@@ -19,7 +27,6 @@
   );
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(40px);
-  width: 70%;
   padding: 5rem;
 }
 </style>
