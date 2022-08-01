@@ -1,13 +1,22 @@
 <template>
   <div class="col-4 d-flex align-items-center flex-column">
-    <filter-item-vue header="Genre" :options="options.genres" />
-    <filter-item-vue header="IMDB" :options="options.imdb" />
-    <button class="rollButton">Roll</button>
+    <filter-item-vue
+      @get-selected="setOptions"
+      header="Genre"
+      :options="options.genres"
+    />
+    <filter-item-vue
+      @get-selected="setOptions"
+      header="IMDB"
+      :options="options.imdb"
+    />
+    <button v-on:click="deneme()" class="rollButton">Roll</button>
   </div>
 </template>
 
   <script>
 import filterItemVue from "./filterItem.vue";
+import { getMovie } from "../mixins/getMovie";
 export default {
   data() {
     return {
@@ -15,10 +24,21 @@ export default {
         imdb: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         genres: ["All Genres", "Komedi", "Aksiyon", "Korku", "Animasyon"],
       },
+      selected: {
+        imdb: String,
+        genre: String,
+      },
     };
   },
   components: {
     filterItemVue,
+  },
+  mixins: [getMovie],
+  methods: {
+    setOptions(e) {
+      if (e[1] == "Genre") this.selected.genre = e[0];
+      else this.selected.imdb = e[0];
+    },
   },
 };
 </script>
