@@ -3,16 +3,16 @@ export const getMovie={
 
 data(){
 return{
-movies:[],
+    result:{},
 randomPage:Number,
-found:false
 }
 },
 methods:{
-async deneme(){
-    while(this.found==false){
+async roll(imdb,genre){
+    let found=false
+    while(found==false){
         this.randomPage=(Math.floor(Math.random() * 500)+1)
-        await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=15924b5f3d7a9f3d0638df7b72cad0ab&with_genres=28&page=${this.randomPage}`)
+        await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=15924b5f3d7a9f3d0638df7b72cad0ab&with_genres=${genre}&page=${this.randomPage}`)
         .then(res=>{
             let checked=[]
             while(checked.length<=19){
@@ -22,13 +22,11 @@ async deneme(){
                 checked.push(randomIndex);
 
                 const movie=res.data.results[randomIndex]
-                
-                console.log(res.data.page);
-                console.log(checked);
                
-                if(movie.vote_average>=9){
-                    this.found=true;
+                if(movie.vote_average>=imdb){
+                    found=true;
                     console.log(movie);
+                    this.result=movie;
                     break;
                 }    
             }

@@ -14,8 +14,21 @@
       class="select text-center fs-4 border border-0"
       v-model="selected"
     >
-      <option v-for="option in options" :key="option">
-        {{ option }}<span v-if="'number' == typeof option">+</span>
+      <option
+        :value="option.id"
+        v-show="'object' == typeof option"
+        v-for="option in options"
+        :key="option"
+      >
+        {{ option.name }}
+      </option>
+      <option
+        :value="option"
+        v-show="'number' == typeof option"
+        v-for="option in options"
+        :key="option"
+      >
+        {{ option }}
       </option>
     </select>
   </div>

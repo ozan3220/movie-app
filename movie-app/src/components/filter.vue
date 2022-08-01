@@ -10,7 +10,9 @@
       header="IMDB"
       :options="options.imdb"
     />
-    <button v-on:click="deneme()" class="rollButton">Roll</button>
+    <button v-on:click="getRandomMovieAndPostToParent()" class="rollButton">
+      Roll
+    </button>
   </div>
 </template>
 
@@ -20,13 +22,34 @@ import { getMovie } from "../mixins/getMovie";
 export default {
   data() {
     return {
+      selectedGenres: [],
       options: {
         imdb: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        genres: ["All Genres", "Komedi", "Aksiyon", "Korku", "Animasyon"],
+        genres: [
+          { id: 28, name: "Action" },
+          { id: 12, name: "Adventure" },
+          { id: 16, name: "Animation" },
+          { id: 35, name: "Comedy" },
+          { id: 80, name: "Crime" },
+          { id: 99, name: "Documentary" },
+          { id: 18, name: "Drama" },
+          { id: 10751, name: "Family" },
+          { id: 14, name: "Fantasy" },
+          { id: 36, name: "History" },
+          { id: 27, name: "Horror" },
+          { id: 10402, name: "Music" },
+          { id: 9648, name: "Mystery" },
+          { id: 10749, name: "Romance" },
+          { id: 878, name: "Science Fiction" },
+          { id: 10770, name: "TV Movie" },
+          { id: 53, name: "Thriller" },
+          { id: 10752, name: "War" },
+          { id: 37, name: "Western" },
+        ],
       },
       selected: {
         imdb: String,
-        genre: String,
+        genre: Number,
       },
     };
   },
@@ -38,6 +61,22 @@ export default {
     setOptions(e) {
       if (e[1] == "Genre") this.selected.genre = e[0];
       else this.selected.imdb = e[0];
+    },
+    async getRandomMovieAndPostToParent() {
+      await this.roll(this.selected.imdb, this.selected.genre);
+      this.genrePull();
+      this.$emit("movieDetail", [this.result, this.selectedGenres]);
+    },
+    genrePull() {
+      this.selectedGenres = [];
+      for (let c = 0; c < this.result.genre_ids.length; c++) {
+        for (let k = 0; k < this.options.genres.length; k++) {
+          if (this.result.genre_ids[c] == this.options.genres[k].id) {
+            this.selectedGenres.push(this.options.genres[k].name);
+            console.log(this.selectedGenres);
+          }
+        }
+      }
     },
   },
 };

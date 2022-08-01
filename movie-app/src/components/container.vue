@@ -11,8 +11,8 @@
         px-5
       "
     >
-      <FilterVue />
-      <InformationVue />
+      <FilterVue @movie-detail="setMovieInfos" />
+      <InformationVue :result="movieInfos" />
     </div>
   </div>
 </template>
@@ -34,9 +34,20 @@
 import FilterVue from "./filter.vue";
 import InformationVue from "./information.vue";
 export default {
+  data() {
+    return {
+      movieInfos: [],
+    };
+  },
   components: {
     FilterVue,
     InformationVue,
+  },
+  methods: {
+    setMovieInfos(e) {
+      this.movieInfos = e;
+      console.log(this.movieInfos);
+    },
   },
 };
 </script>
