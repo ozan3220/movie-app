@@ -22,7 +22,7 @@ import { getMovie } from "../mixins/getMovie";
 export default {
   data() {
     return {
-      selectedGenres: [],
+      movieGenres: [],
       options: {
         imdb: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         genres: [
@@ -62,18 +62,19 @@ export default {
       if (e[1] == "Genre") this.selected.genre = e[0];
       else this.selected.imdb = e[0];
     },
+
     async getRandomMovieAndPostToParent() {
       await this.roll(this.selected.imdb, this.selected.genre);
       this.genrePull();
-      this.$emit("movieDetail", [this.result, this.selectedGenres]);
+      this.$emit("movieDetail", [this.result, this.movieGenres]);
     },
+
     genrePull() {
-      this.selectedGenres = [];
+      this.movieGenres = [];
       for (let c = 0; c < this.result.genre_ids.length; c++) {
         for (let k = 0; k < this.options.genres.length; k++) {
           if (this.result.genre_ids[c] == this.options.genres[k].id) {
-            this.selectedGenres.push(this.options.genres[k].name);
-            console.log(this.selectedGenres);
+            this.movieGenres.push(this.options.genres[k].name);
           }
         }
       }

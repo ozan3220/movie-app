@@ -18,13 +18,13 @@
       <h2 class="movieStats fs-3 text-break">
         {{ result[0].release_date }} TMDB:{{ result[0].vote_average }}/10
       </h2>
-      <div class="d-flex">
+      <div class="d-flex mb-4">
         <h2
-          class="genre fs-4 text-break mx-5"
+          class="genre fs-5 mx-1 my-1"
           v-for="genre in result[1]"
           :key="genre"
         >
-          {{ genre }}
+          -{{ genre }}
         </h2>
       </div>
       <p class="movieOwerview">{{ result[0].overview }}</p>
@@ -32,6 +32,23 @@
   </div>
 </template>
 
+  <script>
+export default {
+  data() {
+    return {
+      imgSource: "",
+    };
+  },
+  methods: {},
+  props: ["result"],
+
+  updated() {
+    this.imgSource =
+      "https://image.tmdb.org/t/p/original" + this.result[0].poster_path;
+  },
+};
+</script>
+  
 <style scoped>
 .moviePoster {
   width: 220px;
@@ -53,20 +70,9 @@ p {
 .movieInfos h2 {
   word-spacing: 10px;
 }
+.movieOwerview {
+  overflow: auto;
+  margin: 0;
+  max-width: 30rem;
+}
 </style>
-<script>
-export default {
-  data() {
-    return {
-      imgSource: "",
-    };
-  },
-  methods: {},
-  props: ["result"],
-
-  updated() {
-    this.imgSource =
-      "https://image.tmdb.org/t/p/original" + this.result[0].poster_path;
-  },
-};
-</script>

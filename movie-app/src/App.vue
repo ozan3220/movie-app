@@ -16,9 +16,6 @@
 <script>
 import containerVue from "./components/container.vue";
 export default {
-  methods: {
-    method() {},
-  },
   components: {
     containerVue,
   },
